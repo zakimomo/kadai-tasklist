@@ -36,17 +36,13 @@ public class UpdateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
 
 
-            Tasks m = em.find(Tasks.class, (Integer)(request.getSession().getAttribute("tasks_id")));
-
-
-            String ID = request.getParameter("ID");
-            m.setTitle(ID);
+            Tasks t = em.find(Tasks.class, (Integer)(request.getSession().getAttribute("tasks_id")));
 
             String content = request.getParameter("content");
-            m.setContent(content);
+            t.setContent(content);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            m.setUpdated_at(currentTime);
+            t.setUpdated_at(currentTime);
 
 
             em.getTransaction().begin();
@@ -54,7 +50,7 @@ public class UpdateServlet extends HttpServlet {
             em.close();
 
 
-            request.getSession().removeAttribute("message_id");
+            request.getSession().removeAttribute("task_id");
 
 
             response.sendRedirect(request.getContextPath() + "/index");
