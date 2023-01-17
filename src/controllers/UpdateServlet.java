@@ -50,7 +50,7 @@ public class UpdateServlet extends HttpServlet {
             em.close();
 
 
-            request.getSession().removeAttribute("task_id");
+            request.getSession().removeAttribute("tasks_id");
 
 
             response.sendRedirect(request.getContextPath() + "/index");
